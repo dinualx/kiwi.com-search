@@ -1,0 +1,15 @@
+{
+
+    "departure_date_1": {"year":"2023", "month":"July", "day":"11"},
+    "departure_date_2": {"year":"2022", "month":"December", "day":"11"},
+    "departure_date_3": {"year":"2022", "month":"August", "day":"5"},
+    "departure_date_4": {"year":"2023", "month":"June", "day":"22"},
+    "departure_date_5": {"year":"2024", "month":"January", "day":"9"},
+
+    "return_date_1": {"year":"2023", "month":"July", "day":"15"},
+    "return_date_2": {"year":"2022", "month":"December", "day":"19"},
+    "return_date_3": {"year":"2022", "month":"August", "day":"15"},
+    "return_date_4": {"year":"2023", "month":"June", "day":"28"},
+    "return_date_5": {"year":"2024", "month":"January", "day":"17"}
+
+}
