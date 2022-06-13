@@ -127,10 +127,38 @@ Cypress.Commands.add('SelectBaggage', (cabin_baggage, checked_baggage) => {
 })
 
 
+
+
+Cypress.Commands.add('SelectBaggageMulticity', (cabin_baggage, checked_baggage) => { 
+
+
+    kiwi.getPassengersAndBagsBtn().click()
+    Cypress._.times(cabin_baggage, () => {
+        kiwi.getMultiCityCabinBaggageAddBtn().click()
+    })
+    kiwi.getCabinBaggageConfiguredNumber().should('be.visible').should('have.value', cabin_baggage)
+
+
+
+    Cypress._.times(checked_baggage, () => {
+        kiwi.getMultiCityCheckedBaggageAddBtn().click()
+    })
+    kiwi.getCheckedBaggageConfiguredNumber().should('be.visible').should('have.value', checked_baggage)
+
+
+    kiwi.getPassengersAndBagsDoneBtn().click()
+    kiwi.getTotalBaggageConfiguredNumber().should('be.visible').should('contain', cabin_baggage + checked_baggage)
+
+
+
+})
+
+
+
 Cypress.Commands.add('SelectDepartureLocation', (departureLocation) => { 
 
     kiwi.getInputForDepartureLocation().click().type(departureLocation)
-    kiwi.getAddDepartureLocationBtn().click()
+    kiwi.getAddLocationBtn().click()
 
 
 })
@@ -138,10 +166,46 @@ Cypress.Commands.add('SelectDepartureLocation', (departureLocation) => {
 Cypress.Commands.add('SelectDestinationLocation', (destinationLocation) => { 
 
     kiwi.getInputForDestinationLocation().click().type(destinationLocation)
-    kiwi.getAddDepartureLocationBtn().click()
+    kiwi.getAddLocationBtn().click()
 
 
 })
+
+
+Cypress.Commands.add('SelectFirstDefaultDepartureLocationMulticity', (departureLocation) => { 
+
+    kiwi.getInputForFirstDefaultDepartureLocationMulticity().click().type(departureLocation)
+    kiwi.getAddLocationBtn().click()
+
+
+})
+
+Cypress.Commands.add('SelectFirstDefaultDestinationLocationMulticity', (destinationLocation) => { 
+
+    kiwi.getInputForFirstDefaultDestinationLocationMulticity().click().type(destinationLocation)
+    kiwi.getAddLocationBtn().click()
+
+
+})
+
+Cypress.Commands.add('SelectSecondDefaultDepartureLocationMulticity', (departureLocation) => { 
+
+    kiwi.getInputForSecondDefaultDepartureLocationMulticity().click().type(departureLocation)
+    kiwi.getAddLocationBtn().click()
+
+
+})
+
+Cypress.Commands.add('SelectSecondDefaultDestinationLocationMulticity', (destinationLocation) => { 
+
+    kiwi.getInputForSecondDefaultDestinationLocationMulticity().click().type(destinationLocation)
+    kiwi.getAddLocationBtn().click()
+
+
+})
+
+
+
 
 Cypress.Commands.add('selectDate', (yearName, monthName, dayName) => { 
     let givenMonth = dateUtils.getMonthIndexFromName(monthName)

@@ -29,7 +29,7 @@ class kiwiPage{
         cy.get(".ButtonWrapsstyled__ButtonTabletWrap-sc-zf781k-0:nth-child(2)").should('be.visible').should('contain', text)
     }
 
-    removeDefaultDeparture(text){
+    removeDefaultDeparture(){
 
         cy.get(".PlacePickerInputPlacestyled__PlacePickerInputClose-sc-esw2vf-1").click()
     }
@@ -50,6 +50,17 @@ class kiwiPage{
         cy.get(':nth-child(2) > [data-test="Container"] > .Stack__StyledStack-sc-oaff2v-0 > [data-test="DateValue"]').click()
     }
 
+    clickInputForFirstDefaultDepartureDateMulticity(){
+
+        cy.get(':nth-child(2) > .MulticityLinestyled__DateFieldWrapper-sc-9evteg-3 > .SearchFieldstyled__SearchField-sc-1f3jsso-0 > [data-test="SearchDateInput"] > .SearchFieldstyled__SearchFieldItem-sc-1f3jsso-2 > [data-test="SearchField-inputWrapper"] > [data-test="SearchFieldDateInput"]').click()
+    }
+    
+    clickInputForSecondDefaultDepartureDateMulticity(){
+
+        cy.get(':nth-child(3) > .MulticityLinestyled__DateFieldWrapper-sc-9evteg-3 > .SearchFieldstyled__SearchField-sc-1f3jsso-0 > [data-test="SearchDateInput"] > .SearchFieldstyled__SearchFieldItem-sc-1f3jsso-2 > [data-test="SearchField-inputWrapper"] > [data-test="SearchFieldDateInput"]').click()
+    }
+    
+
 
     verifyDatePickerVisible(){
 
@@ -60,10 +71,32 @@ class kiwiPage{
 
         cy.get('[data-test="SearchFormDoneButton"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0').click()
     }
+
     clickSearchForFlights(){
 
         cy.get('[data-test="LandingSearchButton"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0').click()
     }
+
+    clickSearchForFlightsMulticity(){
+
+        cy.get('[data-test="searchMultiCity"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0').click()
+    }
+
+    removeFirstDefaultDepartureMulticity(){
+
+        cy.get('[data-test="PlacePickerInput-origin-0"] > [data-test="PlacePickerInputPlace"] > [data-test="PlacePickerInputPlace-close"]').click()
+    }
+
+    removeSecondDefaultDepartureMulticity(){
+        cy.get('[data-test="SearchPlaceField-origin-1"]').click()
+        cy.get('[data-test="PlacePickerInput-origin-1"] > [data-test="PlacePickerInputPlace"] > [data-test="PlacePickerInputPlace-close"]').click()
+    }
+
+    removeSecondDefaultDestinationMulticity(){
+
+        cy.get('[data-test="PlacePickerInput-destination-1"] > [data-test="PlacePickerInputPlace"] > [data-test="PlacePickerInputPlace-close"]').click()
+    }
+
 
 }
 export default new kiwiPage();

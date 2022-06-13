@@ -90,6 +90,17 @@ class kiwiPageUtils{
         return cy.get('[data-test="BagsPopup-cabin"] > .LabeledStepperstyled__StepperWrap-sc-oo4v0a-4 > .StepperStateless__StyledStepper-sc-er9xml-0 > [aria-label="increment"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0')
     }
 
+    getMultiCityCabinBaggageAddBtn(){
+
+        return cy.get('[data-test="BagsPopup-cabin"] > .LabeledStepperstyled__StepperWrap-sc-oo4v0a-4 > .StepperStateless__StyledStepper-sc-er9xml-0 > [aria-label="increment"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0 > .ButtonPrimitiveIconContainer__StyledButtonPrimitiveIconContainer-sc-8rx3cv-0 > .Icon__StyledIcon-sc-1det6wr-0')
+    }
+
+    getMultiCityCheckedBaggageAddBtn(){
+
+        return cy.get('[data-test="BagsPopup-checked"] > .LabeledStepperstyled__StepperWrap-sc-oo4v0a-4 > .StepperStateless__StyledStepper-sc-er9xml-0 > [aria-label="increment"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0 > .ButtonPrimitiveIconContainer__StyledButtonPrimitiveIconContainer-sc-8rx3cv-0 > .Icon__StyledIcon-sc-1det6wr-0')
+    }
+
+   
     getCabinBaggageRmvBtn(){
 
         return cy.get('[data-test="BagsPopup-cabin"] > .LabeledStepperstyled__StepperWrap-sc-oo4v0a-4 > .StepperStateless__StyledStepper-sc-er9xml-0 > [aria-label="decrement"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0')
@@ -125,9 +136,32 @@ class kiwiPageUtils{
 
         return cy.get('[data-test="PlacePickerInput-origin"]')
     }
+
+
+    getInputForFirstDefaultDepartureLocationMulticity(){
+
+        return cy.get('[data-test="SearchPlaceField-origin-0"]')
+    }
+
+    getInputForFirstDefaultDestinationLocationMulticity(){
+
+        return cy.get('[data-test="SearchPlaceField-destination-0"]')
+    }
     
     
-    getAddDepartureLocationBtn(){
+    getInputForSecondDefaultDepartureLocationMulticity(){
+
+        return cy.get('[data-test="SearchPlaceField-origin-1"]')
+    }
+
+    getInputForSecondDefaultDestinationLocationMulticity(){
+
+        return cy.get('[data-test="SearchPlaceField-destination-1"]')
+    }
+    
+
+    
+    getAddLocationBtn(){
 
         return cy.get(':nth-child(1) > [data-test="PlacePickerRow-city"] > .Stack__StyledStack-sc-oaff2v-0 > [data-test="PlacePickerRow-wrapper"] > .RowButtonsstyled__AddButton-sc-1imtypa-0 > .ButtonPrimitive__StyledButtonPrimitive-sc-1lbd19y-0 > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0')
     }
@@ -146,6 +180,11 @@ class kiwiPageUtils{
     getInputForReturnDate(){
 
         return cy.get(':nth-child(4) > [data-test="SearchDateInput"] > .SearchFieldstyled__SearchFieldItem-sc-1f3jsso-2 > [data-test="SearchField-inputWrapper"] > [data-test="SearchFieldDateInput"]')
+    }
+
+    getInputForFirstDefaultDepartureDateMulticity(){
+
+        return cy.get(':nth-child(2) > .MulticityLinestyled__DateFieldWrapper-sc-9evteg-3 > .SearchFieldstyled__SearchField-sc-1f3jsso-0 > [data-test="SearchDateInput"] > .SearchFieldstyled__SearchFieldItem-sc-1f3jsso-2 > [data-test="SearchField-inputWrapper"] > [data-test="SearchFieldDateInput"]')
     }
 
     getDatePicker(){
