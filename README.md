@@ -152,3 +152,60 @@ Cypress.Commands.add('selectDate', (yearName, monthName, dayName) => {
      })
 
  })
+ 
+ I have used this mapping to transform the month name into a number
+ Did this to know how we have to navigate to find the month in the calendar.
+ 
+ getMonthIndexFromName(monthName){
+
+        var months = {
+
+            'January' : '01',
+            'February' : '02',
+            'March' : '03',
+            'April' : '04',
+            'May' : '05',
+            'June' : '06',
+            'July' : '07',
+            'August' : '08',
+            'September' : '09',
+            'October' : '10',
+            'November' : '11',
+            'December' : '12'
+
+        }
+
+        return months[monthName]
+    }
+	
+	
+	
+2. Another thing to mention, for nomad flight there is a slidebar to configure trip length, it has two handles.
+I created a custom command to move each handle based on position.
+
+Cypress.Commands.add('selectTripInterval', (dayNumber1, dayNumber2) => { 
+
+
+    let coordinate1 = dateUtils.leftHandleTransformToDayFromCoordinate(dayNumber1)
+    let coordinate2 = dateUtils.RightHandleTransformToDayFromCoordinate(dayNumber2)
+
+    
+    cy.get('[data-test="SliderHandle-0"]').trigger('mousedown', {button:0}, { force: true })
+    .trigger("mousemove",{clientX: coordinate1, clientY: 0, screenX: coordinate1, screenY: 0, pageX: coordinate1, pageY: 0 }, { force: true })
+    .trigger("mouseup", {force:true})
+    
+    cy.get('[data-test="SliderHandle-1"]').trigger('mousedown', {button:0}, { force: true })
+    .trigger("mousemove",{clientX: coordinate2, clientY: 0, screenX: coordinate2, screenY: 0, pageX: coordinate2, pageY: 0 }, { force: true })
+    .trigger("mouseup", {force:true})
+
+    if(coordinate2>coordinate1){
+        kiwi.getDisplayedIntervalDate().should('be.visible').should('have.text','Stay ' + dayNumber1 + ' – ' + dayNumber2 + ' nights')
+   
+    }
+    else if (coordinate2<coordinate1){
+        kiwi.getDisplayedIntervalDate().should('be.visible').should('have.text','Stay ' + dayNumber2 + ' – ' + dayNumber1 + ' nights')
+   
+    }
+    
+
+})
