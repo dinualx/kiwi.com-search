@@ -204,6 +204,30 @@ Cypress.Commands.add('SelectSecondDefaultDestinationLocationMulticity', (destina
 
 })
 
+Cypress.Commands.add('SelectInitialDepartureLocationNomad', (departureLocation) => { 
+
+    kiwi.getInputForInitialDepartureLocationNomad().click().type(departureLocation)
+    kiwi.getAddLocationBtn().click()
+
+
+})
+
+Cypress.Commands.add('SelectFirstDestinationLocationNomad', (destinationLocation) => { 
+
+    kiwi.getInputFirstDestinationLocationNomad().click().type(destinationLocation)
+    kiwi.getAddLocationBtnNomad().click()
+
+
+})
+
+Cypress.Commands.add('SelectSecondDestinationLocationNomad', (destinationLocation) => { 
+
+    kiwi.getInputSecondDestinationLocationNomad().click().type(destinationLocation)
+    kiwi.getAddLocationBtnNomad().click()
+
+
+})
+
 
 
 
@@ -283,7 +307,7 @@ Cypress.Commands.add('selectDate', (yearName, monthName, dayName) => {
             cy.log($ele.text())
             if ($ele.text() == dayName){
                 cy.log("Found element")
-                cy.wrap($ele).click()
+                cy.wrap($ele).click({force: true})
     
             }    
         })
@@ -412,8 +436,46 @@ Cypress.Commands.add('moveLeftHandle', (dayNumber) => {
 
     let coordinate = dateUtils.leftHandleTransformToDayFromCoordinate(dayNumber)
     cy.get('[data-test="SliderHandle-0"]').trigger('mousedown', {button:0}, { force: true })
-    .trigger("mousemove", {clientX : coordinate, clientY : 0}, { force: true }).trigger("mousemove")
+    .trigger("mousemove",{clientX: coordinate, clientY: 0, screenX: coordinate, screenY: 0, pageX: coordinate, pageY: 0 }, { force: true })
     .trigger("mouseup", {force:true})
    
+
+})
+
+Cypress.Commands.add('moveRightHandle', (dayNumber) => { 
+
+
+    let coordinate = dateUtils.RightHandleTransformToDayFromCoordinate(dayNumber)
+    cy.get('[data-test="SliderHandle-1"]').trigger('mousedown', {button:0}, { force: true })
+    .trigger("mousemove",{clientX: coordinate, clientY: 0, screenX: coordinate, screenY: 0, pageX: coordinate, pageY: 0 }, { force: true })
+    .trigger("mouseup", {force:true})
+   
+
+})
+
+Cypress.Commands.add('selectTripInterval', (dayNumber1, dayNumber2) => { 
+
+
+    let coordinate1 = dateUtils.leftHandleTransformToDayFromCoordinate(dayNumber1)
+    let coordinate2 = dateUtils.RightHandleTransformToDayFromCoordinate(dayNumber2)
+
+    
+    cy.get('[data-test="SliderHandle-0"]').trigger('mousedown', {button:0}, { force: true })
+    .trigger("mousemove",{clientX: coordinate1, clientY: 0, screenX: coordinate1, screenY: 0, pageX: coordinate1, pageY: 0 }, { force: true })
+    .trigger("mouseup", {force:true})
+    
+    cy.get('[data-test="SliderHandle-1"]').trigger('mousedown', {button:0}, { force: true })
+    .trigger("mousemove",{clientX: coordinate2, clientY: 0, screenX: coordinate2, screenY: 0, pageX: coordinate2, pageY: 0 }, { force: true })
+    .trigger("mouseup", {force:true})
+
+    if(coordinate2>coordinate1){
+        kiwi.getDisplayedIntervalDate().should('be.visible').should('have.text','Stay ' + dayNumber1 + ' – ' + dayNumber2 + ' nights')
+   
+    }
+    else if (coordinate2<coordinate1){
+        kiwi.getDisplayedIntervalDate().should('be.visible').should('have.text','Stay ' + dayNumber2 + ' – ' + dayNumber1 + ' nights')
+   
+    }
+    
 
 })

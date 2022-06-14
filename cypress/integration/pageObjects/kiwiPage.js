@@ -60,6 +60,20 @@ class kiwiPage{
         cy.get(':nth-child(3) > .MulticityLinestyled__DateFieldWrapper-sc-9evteg-3 > .SearchFieldstyled__SearchField-sc-1f3jsso-0 > [data-test="SearchDateInput"] > .SearchFieldstyled__SearchFieldItem-sc-1f3jsso-2 > [data-test="SearchField-inputWrapper"] > [data-test="SearchFieldDateInput"]').click()
     }
     
+    clickInputForDepartureDateNomad(){
+
+        cy.get(':nth-child(2) > .SearchFieldstyled__SearchField-sc-1f3jsso-0 > [data-test="SearchDateInput"] > .SearchFieldstyled__SearchFieldItem-sc-1f3jsso-2 > [data-test="SearchField-inputWrapper"] > [data-test="SearchFieldDateInput"]').click()
+    }
+
+    clickInputForTripIntervalNomad(){
+
+        cy.get(':nth-child(3) > .SearchFieldstyled__SearchField-sc-1f3jsso-0 > [data-test="SearchDateInput"] > .SearchFieldstyled__SearchFieldItem-sc-1f3jsso-2 > [data-test="SearchField-inputWrapper"] > [data-test="SearchFieldDateInput"]').click()
+    }
+
+    clickAddDestinations(){
+
+        cy.get('[data-test="AddDestinationButton"] > .ButtonPrimitive__StyledButtonPrimitive-sc-1lbd19y-0 > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0').click()
+    }
 
 
     verifyDatePickerVisible(){
@@ -82,6 +96,11 @@ class kiwiPage{
         cy.get('[data-test="searchMultiCity"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0').click()
     }
 
+    clickSearchForFlightsNomad(){
+
+        cy.get('[data-test="ViasModalSearchButton"] > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0').click()
+    }
+
     removeFirstDefaultDepartureMulticity(){
 
         cy.get('[data-test="PlacePickerInput-origin-0"] > [data-test="PlacePickerInputPlace"] > [data-test="PlacePickerInputPlace-close"]').click()
@@ -96,7 +115,11 @@ class kiwiPage{
 
         cy.get('[data-test="PlacePickerInput-destination-1"] > [data-test="PlacePickerInputPlace"] > [data-test="PlacePickerInputPlace-close"]').click()
     }
+    
+    removeFirstDefaultDepartureNomad(){
 
+        cy.get('[data-test="PlacePickerInputPlace-close"] > .Icon__StyledIcon-sc-1det6wr-0').click()
+    }
 
 }
 export default new kiwiPage();

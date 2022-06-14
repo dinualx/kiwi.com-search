@@ -160,11 +160,32 @@ class kiwiPageUtils{
     }
     
 
+    getInputForInitialDepartureLocationNomad(){
+
+        return cy.get('[data-test="SearchFieldItem-origin-0"]')
+    }
+
+    getInputFirstDestinationLocationNomad(){
+
+        return cy.get(':nth-child(1) > .Nomadstyled__NomadFormCard-sc-d1z7xe-0 > .Nomadstyled__NomadFormCardItem-sc-d1z7xe-1')
+    }
+
+    getInputSecondDestinationLocationNomad(){
+
+        return cy.get(':nth-child(2) > .Nomadstyled__NomadFormCard-sc-d1z7xe-0 > .Nomadstyled__NomadFormCardItem-sc-d1z7xe-1')
+    }
+
     
     getAddLocationBtn(){
 
         return cy.get(':nth-child(1) > [data-test="PlacePickerRow-city"] > .Stack__StyledStack-sc-oaff2v-0 > [data-test="PlacePickerRow-wrapper"] > .RowButtonsstyled__AddButton-sc-1imtypa-0 > .ButtonPrimitive__StyledButtonPrimitive-sc-1lbd19y-0 > .ButtonPrimitiveContent__StyledButtonPrimitiveContent-sc-1r81o9a-0')
     }
+
+    getAddLocationBtnNomad(){
+
+        return cy.get('.fJKUMo')
+    }
+
 
     
     getInputForDestinationLocation(){
@@ -221,6 +242,11 @@ class kiwiPageUtils{
     getAllDaysCalendar(){
 
         return cy.get('[data-type="DayContainer"]')
+    }
+
+    getDisplayedIntervalDate(){
+
+        return cy.get('.belzsS')
     }
 
     
