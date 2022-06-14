@@ -53,3 +53,102 @@ There are 4 automated test cases, one for each type of flight:
 1.4_nomad_flight
 
 
+Things worth mentioning:
+
+1. For each type of flight, at least one calendar date must be chosen, depending on the type of flight, even two dates.
+I covered this functionality by creating a custom command, "selectDate" 
+
+Cypress.Commands.add('selectDate', (yearName, monthName, dayName) => { 
+    
+	###we re using getMonthIndexFromName() to transform the month into anumber
+	let givenMonth = dateUtils.getMonthIndexFromName(monthName)
+	###Day.js is a minimalist JavaScript date library for parsing, validating, manipulating, and formatting dates.
+	###we get the actual date
+    const dayjs = require('dayjs')
+    let actual = dayjs().format('DD/MM/YYYY').split('/')
+	### we get from date format the year, month and day values separately
+    let min_year = actual[2]
+    let min_month = actual[1]
+    let min_day = actual[0]
+    cy.log(min_month)
+    cy.log(min_year)
+    cy.log(min_day)
+	### we validate if the date we want to configure is in the past
+    if(yearName<min_year){
+
+        throw 'Specified year number is not available in the calendar!'
+    }
+    else if(yearName==min_year){
+        if(givenMonth<min_month){
+            throw 'Specified month number is not available in the calendar!'
+        }
+        else if(givenMonth>min_month){
+
+            cy.log('we need to move forward with the month')
+                }
+        else if(givenMonth=min_month){
+
+            if(dayName<min_day){
+                throw 'Specified day number is not available in the calendar!'
+            }
+            else if(dayName>min_day){
+                cy.log('we need to move forward with the day')
+            }
+                }
+        
+    }
+    else if(yearName>min_year){
+        cy.log('we need to move forward with the year')
+    }
+		### we get the dislayed date from the kiwi calendar and split it into year and month values separately
+        kiwi.getDisplayedDate().then(($date) => {
+    
+        let value = $date.text().split(' ')
+        let actual_year = value[1]
+        let actual_month = value[0]
+		### the logic below is tho select the coresponding year, if needed we click on the button to navigate further
+		### untill the year is as expected; if we move forward after the year is as expected, the first date 
+		### automatically will be the desired year together with the first month of the year, which is January
+		
+        if(actual_year==yearName){
+
+            cy.log(yearName + ' year is selected as it should')
+            // return
+        }
+        
+        else{
+            if(yearName<actual_year){
+
+                cy.log('the year you want to configure is in the past, please review the selected value')
+                throw 'Specified year number is not available in the calendar!'
+            }
+
+            else if (yearName>actual_year){
+                kiwi.getNavigateForwardBtn().click()
+                cy.log('moved forward to select the year')
+            }
+
+        }
+		## the logic below is to select the coresponding month
+        if(actual_month==monthName){
+            cy.log(monthName + ' month is selected as it should')
+            // return
+        }
+        else{
+              
+            kiwi.getNavigateForwardBtn().click()
+            cy.log('moved forward to select the month')
+        }
+		### the logic below is to select the coresponding day
+        kiwi.getAllDaysCalendar().contains(dayName).each(function($ele, index, list) {
+            cy.log($ele.text())
+            if ($ele.text() == dayName){
+                cy.log("Found element")
+                cy.wrap($ele).click({force: true})
+    
+            }    
+        })
+        cy.selectYear(yearName, monthName, dayName)
+     })
+
+ })
